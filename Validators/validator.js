@@ -19,7 +19,7 @@ const isValidUsername = (username) => {
   
     // Validate username
     if (!isValidUsername(username)) {
-      return res.status(400).json({ success: false, message: 'Invalid username format' });
+      return res.status(400).json({ success: false, message: 'Invalid username format, username is at least 3 characters long' });
     }
   
     // Validate password
