@@ -60,6 +60,8 @@ const register = async (req, res) => {
 // User login route
 const login = async (req, res) => {
     
+
+  console.log("hii")
     const { username, password } = req.body;
   
     try {

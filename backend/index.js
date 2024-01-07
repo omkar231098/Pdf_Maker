@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
 
-// const { PdfRouter } = require("./Routes/pdf.route");
+
+const { PdfRouter } = require("./Routes/pdf.route");
 const { auth } = require("./Routes/auth.route");
 const { connection } = require("./Config/db");
 
@@ -28,13 +29,18 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use("/auth", auth);
-// app.use("/pdf",  PdfRouter);
+app.use("/auth",auth);
+app.use("/pdf",PdfRouter);
+
+app.use(express.urlencoded({ extended: true }));
+
+
+
+
+
+
 
 const port = process.env.PORT || 8500;
-
-
-
 
 app.listen(port, async () => {
   try {
