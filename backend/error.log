@@ -1,0 +1,8 @@
+2024-01-08T16:01:04.518Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231004_124042.png'
+2024-01-08T16:02:30.848Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231004_124042.png'
+2024-01-08T16:04:04.254Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231004_124042.png'
+2024-01-08T16:05:28.152Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231004_124042.png'
+2024-01-08T16:06:37.789Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231018_110353.png'
+2024-01-08T16:10:45.118Z [ERROR] [auth] Internal Server Error: Unknown image format.
+2024-01-08T16:12:08.249Z [ERROR] [auth] Internal Server Error: Unknown image format.
+2024-01-08T16:12:27.880Z [ERROR] [auth] Internal Server Error: Unknown image format.

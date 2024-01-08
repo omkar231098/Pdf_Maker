@@ -1,3 +1,18 @@
 2024-01-07T18:20:23.969Z [INFO] [auth] PDF creation successful
 2024-01-07T18:27:37.744Z [INFO] [auth] PDF creation successful
 2024-01-07T18:29:57.072Z [INFO] [auth] PDF creation successful
+2024-01-08T15:57:22.794Z [INFO] [auth] PDF creation successful
+2024-01-08T16:01:04.518Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231004_124042.png'
+2024-01-08T16:02:30.848Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231004_124042.png'
+2024-01-08T16:04:04.254Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231004_124042.png'
+2024-01-08T16:05:28.152Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231004_124042.png'
+2024-01-08T16:06:37.789Z [ERROR] [auth] Internal Server Error: ENOENT: no such file or directory, open 'C:\Users\Admin\Desktop\Company Assignments\Pdf_Maker\backend\Controllers\uploads\20231018_110353.png'
+2024-01-08T16:10:45.118Z [ERROR] [auth] Internal Server Error: Unknown image format.
+2024-01-08T16:12:08.249Z [ERROR] [auth] Internal Server Error: Unknown image format.
+2024-01-08T16:12:27.880Z [ERROR] [auth] Internal Server Error: Unknown image format.
+2024-01-08T16:30:10.874Z [INFO] [auth] PDF creation successful
+2024-01-08T16:31:13.655Z [INFO] [auth] PDF creation successful
+2024-01-08T16:36:25.120Z [INFO] [auth] PDF creation successful
+2024-01-08T16:46:11.218Z [INFO] [auth] PDF creation successful
+2024-01-08T17:18:13.417Z [INFO] [auth] PDF creation successful
+2024-01-08T17:22:07.387Z [INFO] [auth] PDF creation successful
