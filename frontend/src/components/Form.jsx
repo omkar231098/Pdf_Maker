@@ -1,53 +1,72 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Form = () => {
-    const [data, setData] = useState({ name: '', age: '', address: '', photo: '' });
+  const [data, setData] = useState({ name: '', age: '', address: '', photo: '' });
 
-    const handleChange = (e) => {
-      const name = e.target.name;
-      const value = e.target.value;
-      setData({ ...data, [name]: value });
-    };
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData({ ...data, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    const name = e.target.name;
+    const file = e.target.files[0];
   
-    const handleFileChange = (e) => {
-      const name = e.target.name;
-      const file = e.target.files[0];
+    console.log('Name:', name);
+    console.log('File:', file);
   
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setData({ ...data, [name]: reader.result });
-      };
+    const formData = new FormData();
+    formData.append(name, file);
   
-      if (file) {
-        reader.readAsDataURL(file);
+    console.log('FormData:', formData);
+  
+    setData((prevData) => ({ ...prevData, [name]: formData }));
+  };
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const formData = new FormData();
+  
+      // Append data fields
+      formData.append('name', data.name);
+      formData.append('age', data.age);
+      formData.append('address', data.address);
+      formData.append('photo', data.photo.get('photo'));
+  
+      const response = await axios.post('http://localhost:8500/pdf/submit', formData, {
+        responseType: 'blob', // Set responseType to 'blob' to handle binary data
+      });
+  
+      if (response.status === 200) {
+        // Create a Blob URL for the blob
+        const blobUrl = URL.createObjectURL(response.data);
+  
+        // Create an anchor element
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = 'generated_pdf.pdf';
+  
+        // Append the anchor element to the body and trigger a click event
+        document.body.appendChild(a);
+        a.click();
+  
+        // Remove the anchor element from the body
+        document.body.removeChild(a);
+  
+        console.log('Form submitted successfully!');
+      } else {
+        console.error('Form submission failed.');
       }
-    };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      try {
-        const response = await fetch('http://localhost:8500/pdf/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        });
-  
-        if (response.ok) {
-          // Handle successful form submission, e.g., show a success message
-          console.log('Form submitted successfully!');
-        } else {
-          // Handle errors, e.g., show an error message
-          console.error('Form submission failed.');
-        }
-      } catch (error) {
-        // Handle network errors or other issues
-        console.error('Error during form submission:', error);
-      }
-    };
-  
+    } catch (error) {
+      console.error('Error during form submission:', error);
+    }
+  };
 
   return (
     <form method="post" onSubmit={handleSubmit}>

@@ -9,6 +9,7 @@ const PDFDocument = require('pdfkit');
 
 const CreatePDF = async (req, res) => {
   const userID = req.userId;
+
   try {
     const upload = multer({
       storage: multer.diskStorage({
@@ -19,6 +20,9 @@ const CreatePDF = async (req, res) => {
           cb(null, file.originalname);
         },
       }),
+      limits: {
+        fileSize: 50 * 1024 * 1024, // 50 MB
+      },
     }).single('photo');
 
     // Call the Multer middleware to handle file upload
@@ -28,42 +32,43 @@ const CreatePDF = async (req, res) => {
         return res.status(500).send('File upload failed');
       }
 
+      // Ensure req.file is defined before accessing its properties
+      if (!req.file) {
+        return res.status(400).send('No file uploaded');
+      }
+
       // Save data to MongoDB
       const newData = new PdfModel({
         name: req.body.name,
         age: req.body.age,
         address: req.body.address,
-        photo: req.file.filename, // Use req.file instead of req.file.filename
+        photo: req.file.filename,
         user: userID,
       });
 
-      try {
-        await newData.save();
-        await UserModel.findByIdAndUpdate(userID, { $push: { pdfs: newData._id } });
+      await newData.save();
+      await UserModel.findByIdAndUpdate(userID, { $push: { pdfs: newData._id } });
 
-        // Generate PDF
-        const pdfDoc = new PDFDocument();
-        res.setHeader('Content-Disposition', `attachment; filename=${newData.name}_details.pdf`);
+      // Generate PDF
+      const pdfDoc = new PDFDocument();
 
-        pdfDoc.text(`Name: ${newData.name}`);
-        pdfDoc.text(`Age: ${newData.age}`);
-        pdfDoc.text(`Address: ${newData.address}`);
-        pdfDoc.image(`uploads/${newData.photo}`, { width: 200 });
+      // Handle 'error' event to ensure proper error logging
+      pdfDoc.on('error', (error) => {
+        console.error('PDF generation error:', error);
+        res.status(500).send('PDF generation error');
+      });
 
-        // Pipe the PDF document to the response stream
-        pdfDoc.pipe(res);
+      // Pipe the PDF stream to the response
+      res.setHeader('Content-Disposition', `attachment; filename=${newData.name}_details.pdf`);
+      res.setHeader('Content-Type', 'application/pdf');
+      pdfDoc.pipe(res);
 
-        // End the response stream after piping the PDF document
-        pdfDoc.end();
+      pdfDoc.text(`Name: ${newData.name}`);
+      pdfDoc.text(`Age: ${newData.age}`);
+      pdfDoc.text(`Address: ${newData.address}`);
+      pdfDoc.image(`uploads/${newData.photo}`, { width: 200 });
 
-        logger.info('PDF creation successful');
-
-        // Do not write to the response stream after it has been ended
-      } catch (saveError) {
-        logger.error(`Error saving data to MongoDB: ${saveError.message}`);
-        console.error(saveError);
-        res.status(500).send('Error saving data to MongoDB');
-      }
+      pdfDoc.end(); // Close the PDF stream
     });
   } catch (error) {
     logger.error(`Internal Server Error: ${error.message}`);
@@ -71,6 +76,8 @@ const CreatePDF = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
+
 
 
 

@@ -8,7 +8,7 @@ const { auth } = require("./Routes/auth.route");
 const { connection } = require("./Config/db");
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 require("dotenv").config();
 app.use(cookieParser());
 
@@ -21,19 +21,13 @@ for (const variable of requiredEnvVariables) {
     process.exit(1); // Exit the process with an error code
   }
 }
+app.use(cors());
 
-const corsOptions = {
-
-  origin: true, // Allow all origins
-
-};
-
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use("/auth",auth);
 app.use("/pdf",PdfRouter);
 
-app.use(express.urlencoded({ extended: true }));
-
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 
 
