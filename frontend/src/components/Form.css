@@ -1,0 +1,48 @@
+/* Form.css */
+
+.form-container {
+    display: flex;
+  }
+  
+  .form-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .preview-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4caf50; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049; /* Darker green color on hover */
+  }
+  
+  /* Add more styling based on your design preferences */
+  

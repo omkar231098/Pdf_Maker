@@ -59,50 +59,40 @@ const register = async (req, res) => {
 
 // User login route
 const login = async (req, res) => {
-    
+  const { username, password } = req.body;
 
-  console.log("hii")
-    const { username, password } = req.body;
-  
-    try {
-      // Find the user with the given email
-      let user = await UserModel.findOne({ username });
-  
-      // Return an error if the user is not found
-      if (!user) {
-        logger.error(`User not found for login attempt: ${username}`);
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      // Compare the provided password with the hashed password in the database
-      const isPasswordMatch = await bcrypt.compare(password, user.password);
-  
-      // Return an error if the passwords do not match
-      if (!isPasswordMatch) {
-        logger.error(`Invalid credentials for user: ${username}`);
-        return res.status(400).json({ status: false, message: 'Invalid Credentials' });
-      }
-  
-      // Generate a JWT token for the authenticated user
-      const accessToken = generateToken(user);
-  
-      // Set the token as a cookie
-      res.cookie('authToken', accessToken, {
-        httpOnly: true,
-        // Add other cookie options as needed (e.g., secure, sameSite)
-      });
-  
-      // Return success message after successful login
-      res.status(200).json({
-        status: true,
-        message: 'Successfully login',
-      });
-    } catch (error) {
-      // Handle server error if login fails
-      logger.error(`Login failed: ${error}`);
-      res.status(500).json({ status: false, message: 'Failed to login' });
+  try {
+    let user = await UserModel.findOne({ username });
+
+    if (!user) {
+      logger.error(`User not found for login attempt: ${username}`);
+      return res.status(404).json({ message: 'User not found' });
     }
-  };
-  
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch) {
+      logger.error(`Invalid credentials for user: ${username}`);
+      return res.status(400).json({ status: false, message: 'Invalid Credentials' });
+    }
+
+    const accessToken = generateToken(user);
+
+    res.cookie('authtoken', accessToken, {
+      httpOnly: true,
+      secure: true, // Only send the cookie over HTTPS if true
+      sameSite: 'None', // Adjust based on your requirements
+    });
+
+    res.status(200).json({
+      status: true,
+      alertMessage: 'Successfully logged in', // Ensure alertMessage is sent
+    });
+  } catch (error) {
+    logger.error(`Login failed: ${error}`);
+    res.status(500).json({ status: false, message: 'Failed to login' });
+  }
+};
+
 
 module.exports = { register, login };

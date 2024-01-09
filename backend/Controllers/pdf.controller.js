@@ -6,7 +6,6 @@ const multer = require('multer');
 const PDFDocument = require('pdfkit');
 
 
-
 const CreatePDF = async (req, res) => {
   const userID = req.userId;
 
@@ -68,6 +67,8 @@ const CreatePDF = async (req, res) => {
       pdfDoc.text(`Address: ${newData.address}`);
       pdfDoc.image(`uploads/${newData.photo}`, { width: 200 });
 
+      
+
       pdfDoc.end(); // Close the PDF stream
     });
   } catch (error) {
@@ -76,6 +77,9 @@ const CreatePDF = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
+
+
 
 
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import './Form.css';
 const Form = () => {
-  const [data, setData] = useState({ name: '', age: '', address: '', photo: '' });
+  const [data, setData] = useState({ name: '', age: '', address: '', photo: '', pdfPreview: null });
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -13,53 +13,34 @@ const Form = () => {
   const handleFileChange = (e) => {
     const name = e.target.name;
     const file = e.target.files[0];
-  
-    console.log('Name:', name);
-    console.log('File:', file);
-  
-    const formData = new FormData();
-    formData.append(name, file);
-  
-    console.log('FormData:', formData);
-  
-    setData((prevData) => ({ ...prevData, [name]: formData }));
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setData({ ...data, [name]: file });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const formData = new FormData();
-  
-      // Append data fields
       formData.append('name', data.name);
       formData.append('age', data.age);
       formData.append('address', data.address);
-      formData.append('photo', data.photo.get('photo'));
-  
+      formData.append('photo', data.photo);
+
       const response = await axios.post('http://localhost:8500/pdf/submit', formData, {
-        responseType: 'blob', // Set responseType to 'blob' to handle binary data
+        responseType: 'blob',
       });
-  
+
       if (response.status === 200) {
-        // Create a Blob URL for the blob
         const blobUrl = URL.createObjectURL(response.data);
-  
-        // Create an anchor element
-        const a = document.createElement('a');
-        a.href = blobUrl;
-        a.download = 'generated_pdf.pdf';
-  
-        // Append the anchor element to the body and trigger a click event
-        document.body.appendChild(a);
-        a.click();
-  
-        // Remove the anchor element from the body
-        document.body.removeChild(a);
-  
-        console.log('Form submitted successfully!');
+        setData({ ...data, pdfPreview: blobUrl });
       } else {
         console.error('Form submission failed.');
       }
@@ -69,14 +50,42 @@ const Form = () => {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
-      <h1>Enter Your Details</h1>
-      <input type="text" name="name" onChange={handleChange} value={data.name} placeholder="Name" />
-      <input type="number" name="age" onChange={handleChange} value={data.age} placeholder="Age" />
-      <input type="text" name="address" onChange={handleChange} value={data.address} placeholder="Address" />
-      <input type="file" name="photo" onChange={handleFileChange} placeholder="Upload Photo" />
-      <button type="submit">Save</button>
-    </form>
+    <div style={{ display: 'flex', height: '99vh' }}>
+    {/* Form Section */}
+    <div style={{ flex: 1, padding: '20px', overflowY: 'auto' }}>
+      <form method="post" onSubmit={handleSubmit}>
+        <h1>Enter Your Details</h1>
+        <input type="text" name="name" onChange={handleChange} value={data.name} placeholder="Name" />
+        <input type="number" name="age" onChange={handleChange} value={data.age} placeholder="Age" />
+        <input type="text" name="address" onChange={handleChange} value={data.address} placeholder="Address" />
+        <input type="file" name="photo" onChange={handleFileChange} placeholder="Upload Photo" />
+  
+        <button type="submit">Save</button>
+        {/* Add more form elements as needed */}
+      </form>
+    </div>
+  
+    {/* Vertical Line */}
+    <div style={{ width: '1px', background: '#ccc' }}></div>
+  
+    {/* PDF Preview Section */}
+    <div style={{ flex: 1, padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center',  overflowY: 'auto' }}>
+      {data.pdfPreview ? (
+        // Display PDF preview if available
+        <div style={{ textAlign: 'center' }}>
+          <embed src={data.pdfPreview} width="100%" height="600" type="application/pdf" />
+          <a href={data.pdfPreview} download="preview.pdf">
+            <button style={{ marginTop: '10px', backgroundColor: '#007BFF', color: '#ffffff', padding: '10px', borderRadius: '5px', border: 'none' }}>Download PDF</button>
+          </a>
+        </div>
+      ) : (
+        // Display a message if no file has been uploaded
+        <div style={{ border: '2px dashed #007BFF', borderRadius: '5px', padding: '20px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+          <p style={{ margin: 0 }}>No file uploaded yet. Upload a file to see the preview.</p>
+        </div>
+      )}
+    </div>
+  </div>
   );
 };
 
