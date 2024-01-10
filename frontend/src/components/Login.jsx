@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/images/quicklogo.png';
@@ -23,11 +23,11 @@ const Login = () => {
         };
   
         const response = await axios.post('http://localhost:8500/auth/login', payload,{ withCredentials: true });
-  
+        console.log(response.authtoken);
         setIsLoading(false);
   
-        Cookies.set('authtoken', response.authtoken, { expires: 7 });
-  
+        
+        
         if (response.data.alertMessage) {
           Swal.fire({
             icon: 'success',

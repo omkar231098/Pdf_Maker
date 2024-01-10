@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Form.css';
 import Header from './Header'
+import Swal from 'sweetalert2';
 const Form = () => {
   const [data, setData] = useState({ name: '', age: '', address: '', photo: '', pdfPreview: null });
 
@@ -38,14 +39,27 @@ const Form = () => {
       const response = await axios.post('http://localhost:8500/pdf/submit', formData, {
         responseType: 'blob',
       });
-
+      console.log(response)
       if (response.status === 200) {
         const blobUrl = URL.createObjectURL(response.data);
         setData({ ...data, pdfPreview: blobUrl });
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Form submitted successfully!',
+          text: 'Your details have been saved.',
+        });
+
       } else {
         console.error('Form submission failed.');
       }
     } catch (error) {
+      // console.log(error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Form submission failed!',
+        text: 'An error occurred while saving your details.',
+      });
       console.error('Error during form submission:', error);
     }
   };

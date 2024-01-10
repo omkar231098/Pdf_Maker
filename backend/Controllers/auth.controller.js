@@ -78,11 +78,7 @@ const login = async (req, res) => {
 
     const accessToken = generateToken(user);
 
-    res.cookie('authtoken', accessToken, {
-      httpOnly: true,
-      secure: true, // Only send the cookie over HTTPS if true
-      sameSite: 'None', // Adjust based on your requirements
-    });
+    res.cookie('authtoken', accessToken)
 
     res.status(200).json({
       status: true,
@@ -95,4 +91,26 @@ const login = async (req, res) => {
 };
 
 
-module.exports = { register, login };
+const getSingleUser= async (req, res) => {
+
+ 
+  const id=req.params.id
+
+  try {
+    const user=await UserModel.findById(id).select("-password")
+
+    res.status(200).json({success:true,message:"User found",data:user})
+  } catch (error) {
+    res.status(404).json({success:false,message:"No user found"})
+  }
+
+
+}
+
+
+
+
+
+
+
+module.exports = { register, login, getSingleUser };
