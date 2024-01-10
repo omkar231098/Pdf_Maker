@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import axios from 'axios';
 import './Form.css';
 import Header from './Header'
 import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 const Form = () => {
+  const navigate = useNavigate();
+
   const [data, setData] = useState({ name: '', age: '', address: '', photo: '', pdfPreview: null });
+
+
+  
+
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -27,7 +35,25 @@ const Form = () => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+
+    const authToken = Cookies.get('authtoken');
+
+    if (!authToken) {
+      // Redirect or show an alert if the user is not authenticated
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Required',
+        text: 'Please log in to save your PDF.',
+      }).then(() => {
+        navigate('/login'); // Redirect to the login page
+      });
+      return;
+    }
+
+    
+  
 
     try {
       const formData = new FormData();
@@ -51,7 +77,7 @@ const Form = () => {
         });
 
       } else {
-        console.error('Form submission failed.');
+        console.log(response);
       }
     } catch (error) {
       // console.log(error)
