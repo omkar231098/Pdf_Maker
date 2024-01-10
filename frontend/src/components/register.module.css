@@ -1,6 +1,4 @@
-* {
-    font-family: "Lato", sans-serif;
-  }
+
   .register_container {
     display: flex;
   
@@ -40,7 +38,7 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
       rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 5px;
-    font-family: "Lato", sans-serif;
+    font-family: 'Kanit', sans-serif;
   }
   .register_input::placeholder {
     font-size: medium;
@@ -59,7 +57,7 @@
   }
   
   .register_btn {
-    background: linear-gradient(to bottom, rgb(239, 162, 32), rgb(244, 159, 11));
+    background: linear-gradient(to bottom, rgb(214, 1, 1), rgb(244,0,0));
     color: white;
   
     border: none;
@@ -69,7 +67,7 @@
     width: 50%;
     margin: auto;
     border-radius: 5px;
-    font-family: "Lato", sans-serif;
+    font-family: 'Kanit', sans-serif;
     transition: transform 0.2s ease-in-out; /* Add a smooth transition */
   }
   .register_btn:hover {

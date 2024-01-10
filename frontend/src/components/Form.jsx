@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Form.css';
+import Header from './Header'
 const Form = () => {
   const [data, setData] = useState({ name: '', age: '', address: '', photo: '', pdfPreview: null });
 
@@ -49,18 +50,19 @@ const Form = () => {
     }
   };
 
-  return (
-    <div style={{ display: 'flex', height: '99vh' }}>
+  return (<>
+  <Header/>
+    <div style={{ display: 'flex', height: '85vh',marginTop:'10px' }}>
     {/* Form Section */}
     <div style={{ flex: 1, padding: '20px', overflowY: 'auto' }}>
       <form method="post" onSubmit={handleSubmit}>
         <h1>Enter Your Details</h1>
-        <input type="text" name="name" onChange={handleChange} value={data.name} placeholder="Name" />
-        <input type="number" name="age" onChange={handleChange} value={data.age} placeholder="Age" />
-        <input type="text" name="address" onChange={handleChange} value={data.address} placeholder="Address" />
-        <input type="file" name="photo" onChange={handleFileChange} placeholder="Upload Photo" />
+        <input style={{ fontSize:"15px", fontFamily:'Kanit, sans-serif'}} type="text" name="name" onChange={handleChange} value={data.name} placeholder="Name" />
+        <input style={{ fontSize:"15px", fontFamily:'Kanit, sans-serif'}} type="number" name="age" onChange={handleChange} value={data.age} placeholder="Age" />
+        <input style={{ fontSize:"15px", fontFamily:'Kanit, sans-serif'}} type="text" name="address" onChange={handleChange} value={data.address} placeholder="Address" />
+        <input style={{ fontSize:"15px", fontFamily:'Kanit, sans-serif'}} type="file" name="photo" onChange={handleFileChange} placeholder="Upload Photo" />
   
-        <button type="submit">Save</button>
+        <button style={{ fontSize:"15px", fontFamily:'Kanit, sans-serif'}} type="submit">Save</button>
         {/* Add more form elements as needed */}
       </form>
     </div>
@@ -75,7 +77,7 @@ const Form = () => {
         <div style={{ textAlign: 'center' }}>
           <embed src={data.pdfPreview} width="100%" height="600" type="application/pdf" />
           <a href={data.pdfPreview} download="preview.pdf">
-            <button style={{ marginTop: '10px', backgroundColor: '#007BFF', color: '#ffffff', padding: '10px', borderRadius: '5px', border: 'none' }}>Download PDF</button>
+            <button style={{ marginTop: '10px', backgroundColor: 'rgb(244,0,0)', color: '#ffffff', padding: '10px', borderRadius: '5px', border: 'none' }}>Download PDF</button>
           </a>
         </div>
       ) : (
@@ -86,6 +88,8 @@ const Form = () => {
       )}
     </div>
   </div>
+  </>
+    
   );
 };
 

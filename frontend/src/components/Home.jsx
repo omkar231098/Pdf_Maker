@@ -1,10 +1,13 @@
 import React from 'react'
 import Header from './Header'
+import Homedata from './Homedata'
+import Footer from './Footer'
 const Home = () => {
   return (
    <>
    <Header/>
-   <h1>Hello from HomePage</h1>
+   <Homedata/>
+   <Footer/>
    </>
   )
 }

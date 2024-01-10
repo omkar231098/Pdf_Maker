@@ -1,0 +1,78 @@
+.mainbox{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    /* border: 1px solid red; */
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 50px;
+}
+.mainbox1{
+   display: block;
+/* border: 1px solid blue; */
+align-items: center;
+flex-direction: column;
+text-align: left;
+justify-content: left;
+
+}
+
+.mainbox2{
+    display: flex;
+    margin: auto;
+  
+    /* border: 1px solid red; */
+    justify-content: center;
+    
+}
+.mainbox_title{
+font-size: 52px;
+
+font-weight:bolder
+}
+
+.mainbox_subtitle{
+    font-size: 22px;
+ 
+}
+
+.hero_1{
+    width: 65%;
+}
+
+.pdfbutton{
+    font-size: 15px;
+    font-family: 'Kanit', sans-serif;
+    margin-top: 25px;
+}
+
+@media screen and (max-width: 750px) {
+
+    .mainbox{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .hero_1{
+        width: 50%;
+    }
+
+    .mainbox1{
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .mainbox_title{
+        font-size: 45px;
+        
+    
+        }
+        
+        .mainbox_subtitle{
+            font-size: 18px;
+         
+        }
+}

@@ -22,11 +22,11 @@ const Login = () => {
           password: password,
         };
   
-        const response = await axios.post('http://localhost:8500/auth/login', payload);
+        const response = await axios.post('http://localhost:8500/auth/login', payload,{ withCredentials: true });
   
         setIsLoading(false);
   
-        Cookies.set('authtoken', response.data.accessToken, { expires: 7 });
+        Cookies.set('authtoken', response.authtoken, { expires: 7 });
   
         if (response.data.alertMessage) {
           Swal.fire({
@@ -35,7 +35,7 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1500,
           }).then(() => {
-            navigate('/');
+            navigate('/form');
           });
         } else {
           navigate('/');

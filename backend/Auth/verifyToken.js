@@ -3,7 +3,7 @@ require('dotenv').config();
 const authenticate = async (req, res, next) => {
     try {
         // Check if the request has a cookie named 'authToken'
-        const token = req.cookies.authToken;
+        const token = req.cookies.authtoken;
 
         // Check if a token is present
         if (!token) {

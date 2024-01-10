@@ -109,6 +109,7 @@ function Register() {
           onChange={onChangeEventUser}
           required
         />
+        <br></br>
         <button type="submit" className={style.register_btn}>
           Register
         </button>

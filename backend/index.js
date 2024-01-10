@@ -21,8 +21,11 @@ for (const variable of requiredEnvVariables) {
     process.exit(1); // Exit the process with an error code
   }
 }
-app.use(cors());
-
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 // app.use(cors(corsOptions));
 app.use("/auth",auth);
 app.use("/pdf",PdfRouter);

@@ -2,26 +2,31 @@
 
 .form-container {
     display: flex;
+    font-family: 'Kanit', sans-serif;
   }
   
   .form-section {
     flex: 1;
     padding: 20px;
+    font-family: 'Kanit', sans-serif;
   }
   
   .preview-section {
     flex: 1;
     padding: 20px;
+    font-family: 'Kanit', sans-serif;
   }
   
   form {
     display: flex;
     flex-direction: column;
+    font-family: 'Kanit', sans-serif;
   }
   
   h1 {
     font-size: 24px;
     margin-bottom: 20px;
+    font-family: 'Kanit', sans-serif;
   }
   
   input {
@@ -29,20 +34,25 @@
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-family: 'Kanit', sans-serif;
   }
   
   button {
     padding: 10px 20px;
-    background-color: #4caf50; /* Green color */
+    background-color: rgb(244,0,0); /* Green color */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'Kanit', sans-serif;
   }
   
   button:hover {
-    background-color: #45a049; /* Darker green color on hover */
+    background-color: rgb(218, 3, 3) /* Darker green color on hover */
   }
   
   /* Add more styling based on your design preferences */
   
+
+  /* Form.module.css */
+
