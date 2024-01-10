@@ -9,8 +9,8 @@ SnapPDF is a web application that allows users to convert input form information
 - [API Routes](#api-routes)
 - [Authentication](#authentication)
 - [Preview and Download](#preview-and-download)
-- [Styling and UI](#styling-and-ui)
-- [Footer Information](#footer-information)
+- [Screenshots](#screenshots)
+- [Deployed Link](#deployed-link)
 - [Contribution](#contribution)
 - [License](#license)
 
@@ -83,6 +83,31 @@ SnapPDF employs token-based authentication to secure access to protected routes.
 
 - **Endpoint:** `POST /auth/login`
 - **Description:** Users can log in by providing their registered username and password. Upon successful authentication, the server generates a JWT and sets it as an HTTP-only cookie.
+
+
+## Preview and Download
+
+After submitting the form, users can preview the collected data before downloading the PDF. The PDF includes all the information entered in the form, with an option to download it for offline use.
+
+## Screenshots
+## 1. HomePage
+
+![HomePage](https://github.com/omkar231098/Pdf_Maker/assets/109202596/0442a892-15e6-44cd-a9d6-285fd88d12c9)
+
+## 2. RegisterPage
+![Register Page](https://github.com/omkar231098/Pdf_Maker/assets/109202596/f9900bf1-2977-45d3-a9f0-d4b340654e05)
+
+## 3. LoginPage
+![Login Page](https://github.com/omkar231098/Pdf_Maker/assets/109202596/b5c79d2f-d2c0-48bf-bfe4-a03f1ab1c09a)
+
+## 4. PdfFormPage
+
+![PDF form](https://github.com/omkar231098/Pdf_Maker/assets/109202596/32b76c6c-87e3-49e0-8f5b-685c183c8b12)
+
+## 5. PdfFormPage DEMO
+![Working Demo](https://github.com/omkar231098/Pdf_Maker/assets/109202596/5c425f09-481e-48bc-9078-15d93769471f)
+
+
 
 
 
