@@ -16,6 +16,9 @@ SnapPDF is a web application that allows users to convert input form information
 - [Getting Started](#getting-started)
 - [API Routes](#api-routes)
 - [Authentication](#authentication)
+- [Logger](#logger)
+- [Rate Limiter](#rate-limiter)
+- [Validator](#validator)
 - [Preview and Download](#preview-and-download)
 - [Screenshots](#screenshots)
 - [Deployed Link](#deployed-link)
@@ -82,6 +85,34 @@ SnapPDF is a web application that allows users to convert input form information
 
 SnapPDF employs token-based authentication to secure access to protected routes. User authentication is achieved through JSON Web Tokens (JWT) stored in cookies. This approach enhances security and allows for a more seamless user experience.
 
+
+## Logger and Ratelimiter
+
+SnapPDF uses logger and rate limiter middleware to enhance security, monitor application behavior, and prevent abuse of the API. This section provides information on how these components are implemented.
+
+## Logger
+
+### Overview
+
+The logger middleware is responsible for logging various events and errors that occur during the execution of SnapPDF. It helps in debugging, monitoring, and understanding the application's behavior.
+
+### Usage
+
+The logger middleware is integrated using the following steps:
+
+1. **Installation:**
+   ```bash
+   npm install --save morgan
+   
+## Rate Limiter
+
+SnapPDF uses a rate limiter to control the number of requests a user can make within a specific time frame. This helps prevent abuse and ensures fair usage of the application.
+
+## Validator
+
+Input validation is essential for ensuring that user-submitted data is accurate and secure. SnapPDF employs a validator to check and sanitize user input.
+
+
 ### User Registration
 
 - **Endpoint:** `POST /auth/register`
@@ -100,7 +131,8 @@ After submitting the form, users can preview the collected data before downloadi
 ## Screenshots
 ## 1. HomePage
 
-![HomePage](https://github.com/omkar231098/Pdf_Maker/assets/109202596/0442a892-15e6-44cd-a9d6-285fd88d12c9)
+![HomePage](https://github.com/omkar231098/Pdf_Maker/assets/109202596/e4060aa2-721e-45e3-be58-9a6f543315a0)
+
 
 ## 2. RegisterPage
 ![Register Page](https://github.com/omkar231098/Pdf_Maker/assets/109202596/f9900bf1-2977-45d3-a9f0-d4b340654e05)
@@ -110,15 +142,24 @@ After submitting the form, users can preview the collected data before downloadi
 
 ## 4. PdfFormPage
 
-![PDF form](https://github.com/omkar231098/Pdf_Maker/assets/109202596/32b76c6c-87e3-49e0-8f5b-685c183c8b12)
+![PDFForm](https://github.com/omkar231098/Pdf_Maker/assets/109202596/18610d2e-fdd2-48a7-b7c6-ce911538ae19)
+
 
 ## 5. PdfFormPage DEMO
-![Working Demo](https://github.com/omkar231098/Pdf_Maker/assets/109202596/5c425f09-481e-48bc-9078-15d93769471f)
+
+![PDFDEMO](https://github.com/omkar231098/Pdf_Maker/assets/109202596/960d7c61-7829-4f63-8880-77dbc7c4d986)
 
 
+## Deployed Link
+The Todo App API is deployed at ()
 
+## Contribution
 
+We welcome contributions! If you have suggestions or improvements for the error handling process, please follow the [Contributing Guidelines](CONTRIBUTING.md).
 
+## License
+
+This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
 
 
 
