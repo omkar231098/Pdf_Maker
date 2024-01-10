@@ -102,7 +102,7 @@ The logger middleware is integrated using the following steps:
 
 1. **Installation:**
    ```bash
-   npm install --save morgan
+   npm install --save winston
    
 ## Rate Limiter
 
