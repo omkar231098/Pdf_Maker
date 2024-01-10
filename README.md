@@ -86,10 +86,6 @@ SnapPDF is a web application that allows users to convert input form information
 SnapPDF employs token-based authentication to secure access to protected routes. User authentication is achieved through JSON Web Tokens (JWT) stored in cookies. This approach enhances security and allows for a more seamless user experience.
 
 
-## Logger and Ratelimiter
-
-SnapPDF uses logger and rate limiter middleware to enhance security, monitor application behavior, and prevent abuse of the API. This section provides information on how these components are implemented.
-
 ## Logger
 
 ### Overview
