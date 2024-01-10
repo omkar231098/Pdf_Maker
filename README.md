@@ -1,6 +1,14 @@
+
+
+
 # SnapPDF
 
+
 SnapPDF is a web application that allows users to convert input form information into PDF documents. The project aims to provide a simple and intuitive interface for users to fill out a form, preview the entered details, and download the information as a PDF file.
+
+# Logo
+
+<img src="https://github.com/omkar231098/Pdf_Maker/assets/109202596/127e5cc8-beb4-413d-9db4-111e01659b7b" width="200" />
 
 ## Table of Contents
 - [Features](#features)
