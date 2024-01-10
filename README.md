@@ -69,3 +69,25 @@ SnapPDF is a web application that allows users to convert input form information
 
 - **User Login:**
   `POST /auth/login`
+
+## Authentication
+
+SnapPDF employs token-based authentication to secure access to protected routes. User authentication is achieved through JSON Web Tokens (JWT) stored in cookies. This approach enhances security and allows for a more seamless user experience.
+
+### User Registration
+
+- **Endpoint:** `POST /auth/register`
+- **Description:** This endpoint handles user registration. Users provide a valid username and password during registration. Upon successful registration, the server generates a JWT and sets it as an HTTP-only cookie.
+
+### User Login
+
+- **Endpoint:** `POST /auth/login`
+- **Description:** Users can log in by providing their registered username and password. Upon successful authentication, the server generates a JWT and sets it as an HTTP-only cookie.
+
+
+
+
+
+
+
+
