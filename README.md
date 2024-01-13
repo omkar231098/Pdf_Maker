@@ -147,7 +147,7 @@ After submitting the form, users can preview the collected data before downloadi
 
 
 ## Deployed Link
-The Todo App API is deployed at https://snap-pdf-frontend.vercel.app/
+The PDF Maker Frontend is deployed at https://snap-pdf-frontend.vercel.app/
 
 ## Contribution
 
