@@ -112,12 +112,12 @@ Input validation is essential for ensuring that user-submitted data is accurate 
 ### User Registration
 
 - **Endpoint:** `POST /auth/register`
-- **Description:** This endpoint handles user registration. Users provide a valid username and password during registration. Upon successful registration, the server generates a JWT and sets it as an HTTP-only cookie.
+- **Description:** This endpoint handles user registration. Users provide a valid username and password during registration. Upon successful registration, the server generates a JWT.
 
 ### User Login
 
 - **Endpoint:** `POST /auth/login`
-- **Description:** Users can log in by providing their registered username and password. Upon successful authentication, the server generates a JWT and sets it as an HTTP-only cookie.
+- **Description:** Users can log in by providing their registered username and password. Upon successful authentication, the server generates a JWT and sets it as an auth token in localStorage.
 
 
 ## Preview and Download
