@@ -1,4 +1,4 @@
-const getLogger = require('../Logger/logger'); // Update the path based on your actual file structure
+const getLogger = require('../Logger/logger')
 const logger = getLogger('auth'); // Provide the route name, e.g., 'auth' for authentication routes
 const { UserModel } = require('../Model/user.model');
 const bcrypt = require('bcrypt');
@@ -29,7 +29,7 @@ const register = async (req, res) => {
       // Return an error if the user already exists
       return res.status(400).json({
         success: true,
-        message: 'User already exists. Please use a different email.',
+        message: 'User already exists. Please use a different username.',
       });
     }
 
@@ -66,14 +66,14 @@ const login = async (req, res) => {
 
     if (!user) {
       logger.error(`User not found for login attempt: ${username}`);
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ status: false,message: 'User not found' });
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatch) {
       logger.error(`Invalid credentials for user: ${username}`);
-      return res.status(400).json({ status: false, message: 'Invalid Credentials' });
+      return res.status(400).json({ status: false, message: 'Incorrect Password' });
     }
 
     const accessToken = generateToken(user);
@@ -82,7 +82,8 @@ const login = async (req, res) => {
 
     res.status(200).json({
       status: true,
-      alertMessage: 'Successfully logged in', // Ensure alertMessage is sent
+      message: 'Successfully logged in',
+      accessToken // Ensure alertMessage is sent
     });
   } catch (error) {
     logger.error(`Login failed: ${error}`);

@@ -16,7 +16,7 @@ function Register() {
     event.preventDefault();
     console.log(valueuser);
 
-    fetch('http://localhost:8500/auth/register', {
+    fetch('https://tiny-cyan-slug-ring.cyclic.app/auth/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -26,47 +26,48 @@ function Register() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        console.log("my response",res);
 
-        if (!res.isError) {
-          if (
-            res.message &&
-            res.message === 'Registration successful! You can now log in.'
-          ) {
-            // Display a success notification using SweetAlert2
-            Swal.fire({
-              icon: 'success',
-              title: 'Registration Successful!',
-              text: 'You can now log in.',
-            }).then(() => {
-              // Redirect to the login page
-              navigate('/login');
-            });
-          } else {
-            // Display an error notification using SweetAlert2
-            Swal.fire({
-              icon: 'info',
-              title: 'User Already Exists',
-              text: 'Please use a different username.',
-            });
-          }
-        } else {
-          // Display an error notification using SweetAlert2
+        if(res.message==="User already exists. Please use a different username."){
+          Swal.fire({
+                  icon: 'info',
+                  title: 'User already exists.',
+                  text: 'Please use a different username.',
+                })
+        }
+        else if(res.message==="Registration successful! You can now log in."){
+          Swal.fire({
+            icon: 'success',
+            title: 'Registration successful!',
+            text: 'You can now log in.',
+          }).then(() => {
+            navigate('/login');
+          });
+        }else if(res.message==="Invalid username format, username is at least 3 characters long"){
+          Swal.fire({
+            icon: 'info',
+            title: 'Invalid username format',
+            text: 'username is at least 3 characters long',
+          })
+        }else if(res.message==="Invalid password format, Password is at least 6 characters long"){
+          Swal.fire({
+            icon: 'info',
+            title: 'Invalid password format',
+            text: 'Password is at least 6 characters long',
+          })
+        }else{
           Swal.fire({
             icon: 'error',
-            title: 'Something Went Wrong',
-            text: 'Please try again.',
-          });
+            title: 'Registration failed',
+            text: 'Internal server error',
+          })
         }
+       
       })
       .catch((err) => {
-        // Display an error notification using SweetAlert2 for network or unexpected errors
-        console.error(err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Something Went Wrong',
-          text: 'Please try again.',
-        });
+        
+        console.log(err);
+      
       });
   };
 

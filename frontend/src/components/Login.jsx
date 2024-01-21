@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 import Swal from 'sweetalert2';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,50 +15,66 @@ const Login = () => {
     const loginAction = async (e) => {
       e.preventDefault();
       setIsLoading(true);
-  
+    
       try {
         const payload = {
           username: username,
           password: password,
         };
-  
-        const response = await axios.post('http://localhost:8500/auth/login', payload,{ withCredentials: true });
-        console.log(response.authtoken);
+    
+        const response = await fetch('https://tiny-cyan-slug-ring.cyclic.app/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          // credentials: 'include', // Include credentials for CORS
+          body: JSON.stringify(payload),
+        });
+    
+        const data = await response.json();
+        localStorage.setItem('authtoken', data.accessToken)
+    console.log("my response",data)
         setIsLoading(false);
-  
         
-        
-        if (response.data.alertMessage) {
+       
+        if(data.message==="User not found"){
+          Swal.fire({
+            icon: 'info',
+            title: 'User not found',
+            text: 'Please Register',
+            timer: 1500
+          })
+        }else if(data.message==="Incorrect Password"){
+          Swal.fire({
+            icon: 'info',
+            title: 'Incorrect Password',
+            text: 'Please check your password',
+            timer: 1500
+          })
+        }else if(data.message==="Successfully logged in"){
           Swal.fire({
             icon: 'success',
-            title: response.data.alertMessage,
-            showConfirmButton: false,
-            timer: 1500,
+            title: 'Login Successful',
+            timer: 1500
           }).then(() => {
-            navigate('/form');
-          });
-        } else {
-          navigate('/');
+                navigate('/form');
+              });
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: 'Please check your login details',
+          })
         }
+
+      
       } catch (error) {
         setIsLoading(false);
-  
-        if (error.response && error.response.data && error.response.data.message) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Login Failed',
-            text: error.response.data.message,
-          });
-        } else {
-          console.error('Error during login:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Login Failed',
-            text: 'An error occurred during login. Check the console for details.',
-          });
-        }
+    
+      console.log(error)
       }
     };
+    
 
   return (
     <div className={style.register_container}>

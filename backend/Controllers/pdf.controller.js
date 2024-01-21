@@ -2,7 +2,7 @@ const getLogger = require('../Logger/logger'); // Update the path based on your 
 const logger = getLogger('auth'); // Provide the route name, e.g., 'auth' for authentication routes
 const { PdfModel } = require('../Model/pdf.model');
 const { UserModel } = require('../Model/user.model');
-const multer = require('multer');
+
 const PDFDocument = require('pdfkit');
 
 
@@ -10,69 +10,44 @@ const CreatePDF = async (req, res) => {
   const userID = req.userId;
 
   try {
-    const upload = multer({
-      storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-          cb(null, 'uploads/');
-        },
-        filename: (req, file, cb) => {
-          cb(null, file.originalname);
-        },
-      }),
-      limits: {
-        fileSize: 50 * 1024 * 1024, // 50 MB
-      },
-    }).single('photo');
+    const { name, age, address } = req.body;
 
-    // Call the Multer middleware to handle file upload
-    upload(req, res, async (err) => {
-      if (err) {
-        logger.error(`File upload failed: ${err.message}`);
-        return res.status(500).send('File upload failed');
-      }
+    // Generate PDF
+    const pdfDoc = new PDFDocument();
+    pdfDoc.text(`Name: ${name}`);
+    pdfDoc.text(`Age: ${age}`);
+    pdfDoc.text(`Address: ${address}`);
+    pdfDoc.image(Buffer.from(req.file.buffer), { width: 100, height: 100 });
+    pdfDoc.end();
 
-      // Ensure req.file is defined before accessing its properties
-      if (!req.file) {
-        return res.status(400).send('No file uploaded');
-      }
+    // Convert PDF to buffer
+    const pdfBuffer = await new Promise((resolve) => {
+      const chunks = [];
+      pdfDoc.on('data', (chunk) => chunks.push(chunk));
+      pdfDoc.on('end', () => resolve(Buffer.concat(chunks)));
+    });
 
-      // Save data to MongoDB
-      const newData = new PdfModel({
-        name: req.body.name,
-        age: req.body.age,
-        address: req.body.address,
-        photo: req.file.filename,
-        user: userID,
-      });
+    // Find the user by the provided username
+    // const user = await User.findOne({ username: req.cookies.username });
 
-      await newData.save();
-      await UserModel.findByIdAndUpdate(userID, { $push: { pdfs: newData._id } });
+   
+      // Save PDF data to MongoDB
+      const pdf = new PdfModel({ name, age, address, photo: pdfBuffer.toString('base64') ,  user: userID,});
+      await pdf.save();
 
-      // Generate PDF
-      const pdfDoc = new PDFDocument();
-
-      // Handle 'error' event to ensure proper error logging
-      pdfDoc.on('error', (error) => {
-        console.error('PDF generation error:', error);
-        res.status(500).send('PDF generation error');
-      });
-
-      // Pipe the PDF stream to the response
-      res.setHeader('Content-Disposition', `attachment; filename=${newData.name}_details.pdf`);
-      res.setHeader('Content-Type', 'application/pdf');
-      pdfDoc.pipe(res);
-
-      pdfDoc.text(`Name: ${newData.name}`);
-      pdfDoc.text(`Age: ${newData.age}`);
-      pdfDoc.text(`Address: ${newData.address}`);
-      pdfDoc.image(`uploads/${newData.photo}`, { width: 200 });
-
+      await UserModel.findByIdAndUpdate(userID, { $push: { pdfs: pdf._id } });
+      // Update the user's pdfs array with the new PDF
+     
       
 
-      pdfDoc.end(); // Close the PDF stream
-    });
+      // Send the PDF buffer as response
+      res.setHeader('Content-Type', 'application/octet-stream');
+   res.send(pdfBuffer)
+       
+      
+     
   } catch (error) {
-    logger.error(`Internal Server Error: ${error.message}`);
+    logger.error(`error in creating PDF: ${err}`);
     console.error(error);
     res.status(500).send('Internal Server Error');
   }

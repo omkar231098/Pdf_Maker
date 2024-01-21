@@ -1,14 +1,18 @@
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
+
 const authenticate = async (req, res, next) => {
     try {
-        // Check if the request has a cookie named 'authToken'
-        const token = req.cookies.authtoken;
+        // Check if the request has an 'Authorization' header
+        const authorizationHeader = req.headers['authorization'];
 
-        // Check if a token is present
-        if (!token) {
+        // Check if the header is present
+        if (!authorizationHeader) {
             return res.status(401).json({ success: false, message: "No token, authorization failed" });
         }
+
+        // Extract the token from the 'Authorization' header
+        const token = authorizationHeader.split(' ')[1];
 
         // Verify JWT using the provided secret key
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
