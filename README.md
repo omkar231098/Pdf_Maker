@@ -83,7 +83,7 @@ SnapPDF is a web application that allows users to convert input form information
 
 ## Authentication
 
-SnapPDF employs token-based authentication to secure access to protected routes. User authentication is achieved through JSON Web Tokens (JWT) stored in cookies. This approach enhances security and allows for a more seamless user experience.
+SnapPDF employs token-based authentication to secure access to protected routes. User authentication is achieved through JSON Web Tokens (JWT) stored in localStorage. This approach enhances security and allows for a more seamless user experience.
 
 
 ## Logger
