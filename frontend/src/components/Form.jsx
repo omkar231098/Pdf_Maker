@@ -21,6 +21,7 @@ const Form = () => {
   const [age, setAge] = useState('');
   const [address, setAddress] = useState('');
   const [photo, setPhoto] = useState(null);
+  const [number, setNumber] = useState('');
   const [pdfUrl, setPdfUrl] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -35,6 +36,7 @@ const Form = () => {
     formData.append('age', age);
     formData.append('address', address);
     formData.append('photo', photo);
+    formData.append('number', number);
 
     try {
       const token = localStorage.getItem('authtoken');
@@ -113,7 +115,14 @@ const Form = () => {
               onChange={handleFileChange}
               placeholder="Upload Photo"
             />
-
+            <input
+              style={{ fontSize: '15px', fontFamily: 'Kanit, sans-serif' }}
+              type="number"
+              name="number"
+              onChange={(e) => setNumber(e.target.value)}
+              value={number}
+              placeholder="Number"
+            />
             <button
               onClick={handleSubmit}
               style={{ fontSize: '15px', fontFamily: 'Kanit, sans-serif' }}

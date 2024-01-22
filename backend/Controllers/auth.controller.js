@@ -92,22 +92,27 @@ const login = async (req, res) => {
 };
 
 
-const getSingleUser= async (req, res) => {
-
- 
-  const id=req.params.id
+const getSingleUser = async (req, res) => {
+  const id = req.params.id;
 
   try {
-    const user=await UserModel.findById(id).select("-password")
+    const user = await UserModel.findById(id).select("-password");
 
-    res.status(200).json({success:true,message:"User found",data:user})
+    if (user) {
+      // Log successful user retrieval
+      logger.info(`User found with ID ${id}`);
+      res.status(200).json({ success: true, message: "User found", data: user });
+    } else {
+      // Log if no user is found
+      logger.warn(`No user found with ID ${id}`);
+      res.status(404).json({ success: false, message: "No user found" });
+    }
   } catch (error) {
-    res.status(404).json({success:false,message:"No user found"})
+    // Log and handle any errors that occur during the process
+    logger.error(`Error while fetching user with ID ${id}: ${error}`);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
-
-
-}
-
+};
 
 
 

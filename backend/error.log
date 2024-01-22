@@ -52,3 +52,21 @@
 2024-01-09T14:48:24.508Z [ERROR] [auth] Invalid credentials for user: omkardhanave_
 2024-01-09T14:48:28.885Z [ERROR] [auth] Invalid credentials for user: omkardhanave_
 2024-01-10T15:30:52.939Z [ERROR] [auth] User not found for login attempt: omkardhanave_
+2024-01-21T18:42:53.038Z [ERROR] [auth] error in creating PDF: TypeError: pdfDoc.table is not a function
+2024-01-21T18:48:33.077Z [ERROR] [auth] error in creating PDF: TypeError: pdfDoc.embedTable is not a function
+2024-01-21T18:50:16.845Z [ERROR] [auth] error in creating PDF: TypeError: page.getTable is not a function
+2024-01-21T18:50:57.122Z [ERROR] [auth] error in creating PDF: TypeError: page.getTable is not a function
+2024-01-21T18:51:21.737Z [ERROR] [auth] error in creating PDF: TypeError: page.getTable is not a function
+2024-01-21T18:51:23.035Z [ERROR] [auth] error in creating PDF: TypeError: page.getTable is not a function
+2024-01-21T18:53:03.508Z [ERROR] [auth] error in creating PDF: TypeError: page.getTable is not a function
+2024-01-21T18:54:48.545Z [ERROR] [auth] error in creating PDF: TypeError: page.getTable is not a function
+2024-01-21T19:06:50.400Z [ERROR] [auth] error in creating PDF: TypeError: pdfDoc.table is not a function
+2024-01-21T19:07:05.477Z [ERROR] [auth] error in creating PDF: TypeError: pdfDoc.table is not a function
+2024-01-21T19:21:40.206Z [ERROR] [auth] error in creating PDF: TypeError: pdfDoc.table is not a function
+2024-01-21T19:21:42.573Z [ERROR] [auth] error in creating PDF: TypeError: pdfDoc.table is not a function
+2024-01-21T19:37:15.190Z [ERROR] [auth] error in creating PDF: TypeError: pdfmake.createPdf is not a function
+2024-01-21T19:38:33.725Z [ERROR] [auth] error in creating PDF: TypeError: pdfmake.createPdfKitDocument is not a function
+2024-01-21T19:39:57.254Z [ERROR] [auth] error in creating PDF: TypeError: pdfmake.createPdfKitDocument is not a function
+2024-01-21T19:41:26.352Z [ERROR] [auth] error in creating PDF: TypeError: pdfmake.createPdfKitDocument is not a function
+2024-01-21T19:41:32.674Z [ERROR] [auth] error in creating PDF: TypeError: pdfmake.createPdfKitDocument is not a function
+2024-01-21T19:41:44.361Z [ERROR] [auth] error in creating PDF: TypeError: pdfmake.createPdfKitDocument is not a function
